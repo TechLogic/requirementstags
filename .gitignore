@@ -3,4 +3,5 @@
 *.aux
 *test.txt
 *.pdf
-*.synctex
+*.gz
+*.log
