@@ -64,16 +64,20 @@
 }
 
 
+
+\newcommand{\sub}[1][0]{#1}
+
+
 %---------------------------------------------------------------------------------
 %adds a new functional requirement to the list
 %Parameter :  a number for importance see \importance , the text for the requirement
 % Optional Parameter: a number for a sub requirement
 %---------------------------------------------------------------------------------
-\newcommand{\requirement}[4][0]{
-\ifthenelse{#1=0}
-{\stepcounter{req}}
-{}
- \item \textbf{FR \thereq.#1}  \importance{#2}  \bereviewed{#3}#4}
+\newcommand{\requirement}[4][]{
+\ifthenelse{\isempty{#1}}
+{\stepcounter{req}\sub}
+{\sub[#1]}
+ \item \textbf{FR \thereq.\sub}  \importance{#2}  \bereviewed{#3}#4}
 
 
 
