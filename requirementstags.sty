@@ -75,9 +75,9 @@
 %---------------------------------------------------------------------------------
 \newcommand{\requirement}[4][]{
 \ifthenelse{\isempty{#1}}
-{\stepcounter{req}\sub}
-{\sub[#1]}
- \item \textbf{FR \thereq.\sub}  \importance{#2}  \bereviewed{#3}#4}
+{\stepcounter{req}}
+{}
+ \item \textbf{FR \thereq.\sub[#1]}  \importance{#2}  \bereviewed{#3}#4}
 
 
 
@@ -87,9 +87,9 @@
 %Parameter :  a number for importance see \importance , the text for the requirement
 % Optional Parameter: a number for a sub requirement
 %------------------------------------------------------------------------------
-\newcommand{\nfrequirement}[4][0]{\ifthenelse{#1 =0}
+\newcommand{\nfrequirement}[4][]{\ifthenelse{\isempty{#1}}
 {\stepcounter{nonreq}}
 {}
- \item \textbf{NFR \thenonreq.#1}  \importance{#2} \bereviewed{#3}#4}
+ \item \textbf{NFR \thenonreq.\sub[#1]}  \importance{#2} \bereviewed{#3}#4}
 
 \endinput
