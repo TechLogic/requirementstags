@@ -10,11 +10,12 @@
 %---------------------------------------------------------------------------------
 %Requirements importance  categories
 %---------------------------------------------------------------------------------
-\newcommand{\medium}{\textbf{\flq{\color{yellow} medium}  \frq \\}}
-\newcommand{\high}{\textbf{\flq{\color{red} high}  \frq \\}}
-\newcommand{\low}{\textbf{\flq{\color{green} low}  \frq \\}}
-\newcommand{\notClear}{\textbf{\flq{\color{gray} not clear}  \frq \\}}
-
+\newcommand{\medium}{\textbf{\flq{\color{yellow} medium}  \frq }}
+\newcommand{\high}{\textbf{\flq{\color{red} high}  \frq }}
+\newcommand{\low}{\textbf{\flq{\color{green} low}  \frq }}
+\newcommand{\notClear}{\textbf{\flq{\color{blue} not clear}  \frq }}
+\newcommand{\tobereviewed}{\textbf{\flq{\color{cyan}to be reviewed}  \frq \\ }}
+\newcommand{\reviewed}{\textbf{\flq{\color{green}reviewed}  \frq \\ }}
 %---------------------------------------------------------------------------------
 % Counter initialization
 %---------------------------------------------------------------------------------
@@ -42,6 +43,16 @@
 \fi
 }
 
+\newcommand{\bereviewed}[1]{
+\ifcase #1
+\tobereviewed
+\or
+\reviewed
+\else \PackageError{requirementstags}{Unkown index : #1 \\ Index has to be between 0 and 1}
+\fi
+}
+
+
 
 %---------------------------------------------------------------------------------
 %Creating a new requirements list
@@ -58,11 +69,11 @@
 %Parameter :  a number for importance see \importance , the text for the requirement
 % Optional Parameter: a number for a sub requirement
 %---------------------------------------------------------------------------------
-\newcommand{\requirement}[3][0]{
+\newcommand{\requirement}[4][0]{
 \ifthenelse{#1=0}
 {\stepcounter{req}}
 {}
- \item \textbf{FR \thereq.#1}  \importance{#2} #3}
+ \item \textbf{FR \thereq.#1}  \importance{#2}  \bereviewed{#3}#4}
 
 
 
@@ -72,9 +83,9 @@
 %Parameter :  a number for importance see \importance , the text for the requirement
 % Optional Parameter: a number for a sub requirement
 %------------------------------------------------------------------------------
-\newcommand{\nfrequirement}[3][0]{\ifthenelse{#1 =0}
+\newcommand{\nfrequirement}[4][0]{\ifthenelse{#1 =0}
 {\stepcounter{nonreq}}
 {}
- \item \textbf{NFR \thenonreq.#1}  \importance{#2} #3}
+ \item \textbf{NFR \thenonreq.#1}  \importance{#2} \bereviewed{#3}#4}
 
 \endinput
