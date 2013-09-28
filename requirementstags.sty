@@ -1,0 +1,80 @@
+%%Requirements listing file
+%%Created by Nils Heyer
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{requirementstags}
+
+\RequirePackage{color}
+\RequirePackage{xifthen}
+
+%---------------------------------------------------------------------------------
+%Requirements importance  categories
+%---------------------------------------------------------------------------------
+\newcommand{\medium}{\textbf{\flq{\color{yellow} medium}  \frq \\}}
+\newcommand{\high}{\textbf{\flq{\color{red} high}  \frq \\}}
+\newcommand{\low}{\textbf{\flq{\color{green} low}  \frq \\}}
+\newcommand{\notClear}{\textbf{\flq{\color{gray} not clear}  \frq \\}}
+
+%---------------------------------------------------------------------------------
+% Counter initialization
+%---------------------------------------------------------------------------------
+\newcounter{req}
+\setcounter{req}{0}
+
+\newcounter{nonreq}
+\setcounter{nonreq}{0}
+
+
+%---------------------------------------------------------------------------------
+% switch case to define importance as a single number from 0 =  not Clear to 3 = high 
+%---------------------------------------------------------------------------------
+\newcommand{\importance}[1]{
+\ifcase #1
+\notClear
+\or
+\low
+\or
+\medium
+\or
+\high
+\else
+\PackageError{requirementstags}{Unkown index : #1 \\ Index has to be between 0 and 3}
+\fi
+}
+
+
+%---------------------------------------------------------------------------------
+%Creating a new requirements list
+%---------------------------------------------------------------------------------
+\newcommand{\reqlist}[1]{
+\begin{description}
+#1
+\end{description}
+}
+
+
+%---------------------------------------------------------------------------------
+%adds a new functional requirement to the list
+%Parameter :  a number for importance see \importance , the text for the requirement
+% Optional Parameter: a number for a sub requirement
+%---------------------------------------------------------------------------------
+\newcommand{\requirement}[3][0]{
+\ifthenelse{#1=0}
+{\stepcounter{req}}
+{}
+ \item \textbf{FR \thereq.#1}  \importance{#2} #3}
+
+
+
+
+%---------------------------------------------------------------------------------
+%adds a new non functional requirement to the list
+%Parameter :  a number for importance see \importance , the text for the requirement
+% Optional Parameter: a number for a sub requirement
+%------------------------------------------------------------------------------
+\newcommand{\nfrequirement}[3][0]{\ifthenelse{#1 =0}
+{\stepcounter{nonreq}}
+{}
+ \item \textbf{NFR \thenonreq.#1}  \importance{#2} #3}
+
+\endinput
