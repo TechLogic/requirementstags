@@ -1,0 +1,177 @@
+%% Use Cases Style File
+%% Created by Miguel Gonzalez (http://www.my-reality.de)
+%% Downloadable at: http://www.dev.my-reality.de/scripts/latex
+%% Date Modified: 2013-03-26
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+
+%-------------------------------------------------------------------------------
+%                Required Packages
+%-------------------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{xcolor,colortbl}
+\usepackage{etoolbox}
+
+%-------------------------------------------------------------------------------
+%                Define colors
+%-------------------------------------------------------------------------------
+\definecolor{cell}{rgb}{0.9,0.9,0.9}
+
+%-------------------------------------------------------------------------------
+%                Helping commands
+%-------------------------------------------------------------------------------
+
+\newcommand{\cellspacing}{\dimexpr.22\linewidth-2\tabcolsep-1.3333\arrayrulewidth}
+
+
+%-------------------------------------------------------------------------------
+% Nils Heyer : usecase counter  and a list of all codes of the usecases
+%-------------------------------------------------------------------------------
+
+\newcounter{cnt}
+
+\newcommand\addUC[1]{%
+  \stepcounter{cnt}%
+  \csxdef{uc\thecnt}{#1}}
+\newcommand\getUC[1]{%
+  \csuse{uc#1}}
+
+
+
+%-------------------------------------------------------------------------------
+%                \addtitle command: add the title of the use case
+%-------------------------------------------------------------------------------
+
+\newcommand\addtitle[3]{
+\addUC{#1}
+
+\begin{tabularx}{\textwidth}{|l|l|l|X|l|l|}
+\hline
+\cellcolor{cell}\textbf{Code:} & #1 & \cellcolor{cell}\textbf{Name:} & \begin{flushleft}#2\end{flushleft} & \cellcolor{cell}\textbf{Package:} & #3\\
+\end{tabularx}\\
+}
+
+\newcommand\saddtitle[3]{
+\addUC{#1}
+\begin{tabularx}{\textwidth}{|l|l|l|X|l|l|}
+\hline
+\cellcolor{cell}\textbf{Code:} & #1 & \cellcolor{cell}\textbf{Name:} & #2 & \cellcolor{cell}\textbf{Refines:} & #3\\
+\end{tabularx}\\
+}
+
+\newcommand\tabularhead{\begin{longtable}{lp{8.9cm}}
+}
+
+%-------------------------------------------------------------------------------
+%                \adddesc command: add a description to the use case
+%-------------------------------------------------------------------------------
+
+\newcommand\adddesc[1]{
+
+\begin{tabularx}{\textwidth}{|p{\cellspacing}|X|}
+\hline
+\cellcolor{cell}\textbf{Description:} & #1\\
+\hline
+\end{tabularx}\\
+}
+
+\newcommand\sadddesc[4]{
+
+\begin{tabularx}{\textwidth}{|p{\cellspacing}|X|}
+\hline
+\cellcolor{cell}\textbf{Actors:}        & #1\\
+\hline
+\cellcolor{cell}\textbf{Goal:}          & #2\\
+\hline
+\cellcolor{cell}\textbf{Stakeholders}   & #3\\
+\hline
+\cellcolor{cell}\textbf{Preconditions:} & #4\\
+\hline
+\end{tabularx}\\
+}
+
+%-------------------------------------------------------------------------------
+%                \addflow: add basic flow
+%-------------------------------------------------------------------------------
+
+\newcommand\addflow[1]{
+
+\begin{tabularx}{\textwidth}{|p{\cellspacing}|X|}
+\cellcolor{cell}\textbf{Basic flow:} & 
+\begin{enumerate}#1\end{enumerate}\\
+\hline
+\end{tabularx}\\
+}
+
+%-------------------------------------------------------------------------------
+%                \addvar: add variations
+%-------------------------------------------------------------------------------
+
+\newcommand\addvar[1]{
+
+\begin{tabularx}{\textwidth}{|p{\cellspacing}|X|}
+\cellcolor{cell}\textbf{Variations:} & 
+\begin{list}{}{}
+#1
+\end{list}\\
+\hline
+\end{tabularx}\\
+}
+
+%-------------------------------------------------------------------------------
+%                \addscenario command: add the main (or alternative) scenario
+%                of the use case
+%-------------------------------------------------------------------------------
+
+\newcommand\addred[1]{
+
+\begin{tabularx}{\textwidth}{|p{\cellspacing}|X|}
+\cellcolor{cell}\textbf{Redefined by:} & #1\\
+\hline
+\end{tabularx}\\
+}
+
+
+
+
+%-------------------------------------------------------------------------------
+%                \postcond command: add post condition
+%-------------------------------------------------------------------------------
+
+\newcommand\postcond[1]{
+
+\begin{tabularx}{\textwidth}{|p{\cellspacing}|X|}
+\cellcolor{cell}\textbf{Post Conditions:} & #1\\
+\hline
+\end{tabularx}\\
+}
+
+
+%-------------------------------------------------------------------------------
+%                \addfooter command: add a footer
+%-------------------------------------------------------------------------------
+
+\newcommand\addfooter[2]{
+
+\begin{tabularx}{\textwidth}{|p{\cellspacing}|l|l|X|}
+\cellcolor{cell}\textbf{Version:} & #1 & \cellcolor{cell}\textbf{Author:} & #2\\
+\hline
+\end{tabularx}\\
+}
+
+
+
+%-------------------------------------------------------------------------------
+%                Definition of the use case environment
+%-------------------------------------------------------------------------------
+\newenvironment{usecase}{\tabularhead}
+{\end{longtable}}

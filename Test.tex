@@ -1,6 +1,7 @@
 \documentclass{report}
 \usepackage[ngerman, english]{babel} 
 \usepackage{requirementstags}
+\usepackage{usecase}
 
 \begin{document}
 \reqlist{
@@ -8,9 +9,36 @@
 \requirement{1}{1}{low}
 \requirement{2}{1}{medium}
 \requirement{3}{1}{high}
-
 \requirement[1]{0}{0}{Test}
 \requirement[1.0.1]{3}{1}{Subsubrequirement}
+}
+
+
+\begin{usecase}
+\saddtitle{SPUC-1.1.1}{Inserting an order}{HLUC-1.1}
+% TODO
+\sadddesc{Administration}{Create a new order}{Administration,Customer}{}
+\addflow{
+    	\item Insert customer data in order form
+	\item Insert order data in order form 
+	\item Send order to the system
 
 }
+\addvar{
+	% TODO
+	\item None	
+}
+% TODO
+\postcond{SPUC-1.1.2}
+\csuse{UC1}
+\addfooter{1}{Nils Heyer}
+
+
+\end{usecase}
+
+\newpage
+Test:
+\getUC{1}
+
+
 \end{document}
