@@ -6,6 +6,7 @@
 
 \RequirePackage{color}
 \RequirePackage{xifthen}
+\RequirePackage{usecase}
 
 
 
@@ -16,8 +17,8 @@
 \newcommand{\high}{\textbf{\flq{\color{red} high}  \frq }}
 \newcommand{\low}{\textbf{\flq{\color{green} low}  \frq }}
 \newcommand{\notClear}{\textbf{\flq{\color{blue} not clear}  \frq }}
-\newcommand{\tobereviewed}{\textbf{\flq{\color{cyan}to be reviewed}  \frq \\ }}
-\newcommand{\reviewed}{\textbf{\flq{\color{green}reviewed}  \frq \\ }}
+\newcommand{\tobereviewed}{\textbf{\flq{\color{cyan}to be reviewed}  \frq }}
+\newcommand{\reviewed}{\textbf{\flq{\color{green}reviewed}  \frq  }}
 %---------------------------------------------------------------------------------
 % Counter initialization
 %---------------------------------------------------------------------------------
@@ -68,19 +69,22 @@
 
 
 
+
+
 \newcommand{\sub}[1][0]{#1}
 
+\newcommand{\belongsto}[1]{\ifthenelse{0<#1} {Belongs to : \getUC{#1}}{}}
 
 %---------------------------------------------------------------------------------
 %adds a new functional requirement to the list
 %Parameter :  a number for importance see \importance , the text for the requirement
 % Optional Parameter: a number for a sub requirement
 %---------------------------------------------------------------------------------
-\newcommand{\requirement}[4][]{
+\newcommand{\requirement}[5][]{
 \ifthenelse{\isempty{#1}}
 {\stepcounter{req}}
 {}
- \item \textbf{FR \thereq.\sub[#1]}  \importance{#2}  \bereviewed{#3}#4}
+ \item \textbf{FR \thereq.\sub[#1]}  \importance{#2}  \bereviewed{#3} \belongsto{#4} \\#5}
 
 
 
@@ -93,6 +97,6 @@
 \newcommand{\nfrequirement}[4][]{\ifthenelse{\isempty{#1}}
 {\stepcounter{nonreq}}
 {}
- \item \textbf{NFR \thenonreq.\sub[#1]}  \importance{#2} \bereviewed{#3}#4}
+ \item \textbf{NFR \thenonreq.\sub[#1]}  \importance{#2} \bereviewed{#3}   \\#4}
 
 \endinput
