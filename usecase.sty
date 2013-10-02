@@ -14,12 +14,12 @@
 %-------------------------------------------------------------------------------
 %                Required Packages
 %-------------------------------------------------------------------------------
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{longtable}
-\usepackage{tabularx}
-\usepackage{xcolor,colortbl}
-\usepackage{etoolbox}
+\RequirePackage{booktabs}
+\RequirePackage{multirow}
+\RequirePackage{longtable}
+\RequirePackage{tabularx}
+\RequirePackage{xcolor,colortbl}
+\RequirePackage{etoolbox}
 
 %-------------------------------------------------------------------------------
 %                Define colors
@@ -37,11 +37,11 @@
 % Nils Heyer : usecase counter  and a list of all codes of the usecases
 %-------------------------------------------------------------------------------
 
-\newcounter{cnt}
+\newcounter{uc}
 
 \newcommand\addUC[1]{%
-  \stepcounter{cnt}%
-  \csxdef{uc\thecnt}{#1}}
+  \stepcounter{uc}%
+  \csxdef{uc\theuc}{#1}}
 \newcommand\getUC[1]{%
   \csuse{uc#1}}
 
@@ -56,7 +56,7 @@
 
 \begin{tabularx}{\textwidth}{|l|l|l|X|l|l|}
 \hline
-\cellcolor{cell}\textbf{Code:} & #1 & \cellcolor{cell}\textbf{Name:} & \begin{flushleft}#2\end{flushleft} & \cellcolor{cell}\textbf{Package:} & #3\\
+\cellcolor{cell}\textbf{Code:} & #1 & \cellcolor{cell}\textbf{Name:} & \begin{flushleft}#2\end{flushleft} & \cellcolor{cell}\textbf{Package:} & #3
 \end{tabularx}\\
 }
 
@@ -64,7 +64,7 @@
 \addUC{#1}
 \begin{tabularx}{\textwidth}{|l|l|l|X|l|l|}
 \hline
-\cellcolor{cell}\textbf{Code:} & #1 & \cellcolor{cell}\textbf{Name:} & #2 & \cellcolor{cell}\textbf{Refines:} & #3\\
+\cellcolor{cell}\textbf{Code:} & #1 & \cellcolor{cell}\textbf{Name:} & #2 & \cellcolor{cell}\textbf{Refines:} & #3
 \end{tabularx}\\
 }
 

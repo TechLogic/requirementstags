@@ -22,6 +22,29 @@
 %---------------------------------------------------------------------------------
 % Counter initialization
 %---------------------------------------------------------------------------------
+
+
+\newcounter{belongs}
+
+\newcommand\addReqBelongs[1]{%
+\stepcounter{belongs}
+\csxdef{nreq\thebelongs}{\getUC{#1}}
+ }
+
+
+\newcommand\getReqBelongs[1]{%
+  \csuse{nreq#1}}
+
+
+
+\newcommand\addNonReq[1]{%
+  
+  \csxdef{bnonreq\thenonreq}{#1}}
+\newcommand\getNonReq[1]{%
+  \csuse{bnonreq#1}}
+
+
+
 \newcounter{req}
 \setcounter{req}{0}
 
@@ -46,6 +69,9 @@
 \fi
 }
 
+
+
+
 \newcommand{\bereviewed}[1]{
 \ifcase #1
 \tobereviewed
@@ -68,12 +94,31 @@
 
 
 
+\newcommand{\sub}[1][]{#1}
+
+\newcommand{\reqTitle}[1][]{
+\sub[#1]}
 
 
 
-\newcommand{\sub}[1][0]{#1}
+\newcommand\addReqTitle[1]{%
+\csxdef{Title#1}{FR \thereq.
+\ifthenelse{\isempty{#1}}
+{0}
+{#1}
+}
+}
+
+\newcommand\getReqTitle[1]{%
+  \csuse{Title#1}}
+
+
+
+
 
 \newcommand{\belongsto}[1]{\ifthenelse{0<#1} {Belongs to : \getUC{#1}}{}}
+
+\newcommand{\return}[1][]{#1}
 
 %---------------------------------------------------------------------------------
 %adds a new functional requirement to the list
@@ -84,7 +129,9 @@
 \ifthenelse{\isempty{#1}}
 {\stepcounter{req}}
 {}
- \item \textbf{FR \thereq.\sub[#1]}  \importance{#2}  \bereviewed{#3} \belongsto{#4} \\#5}
+\addReqTitle{#1}
+\addReqBelongs{#4}
+ \item \textbf{\reqTitle[#1]}  \importance{#2}  \bereviewed{#3} \belongsto{#4} \\#5}
 
 
 
