@@ -93,20 +93,8 @@
 }
 
 
-
-\newcommand{\sub}[1][]{#1}
-
-\newcommand{\reqTitle}[1][]{
-\sub[#1]}
-
-
-
 \newcommand\addReqTitle[1]{%
-\csxdef{Title#1}{FR \thereq.
-\ifthenelse{\isempty{#1}}
-{0}
-{#1}
-}
+\csxdef{Title\thereq}{#1}
 }
 
 \newcommand\getReqTitle[1]{%
@@ -118,20 +106,16 @@
 
 \newcommand{\belongsto}[1]{\ifthenelse{0<#1} {Belongs to : \getUC{#1}}{}}
 
-\newcommand{\return}[1][]{#1}
-
 %---------------------------------------------------------------------------------
 %adds a new functional requirement to the list
 %Parameter :  a number for importance see \importance , the text for the requirement
 % Optional Parameter: a number for a sub requirement
 %---------------------------------------------------------------------------------
-\newcommand{\requirement}[5][]{
-\ifthenelse{\isempty{#1}}
-{\stepcounter{req}}
-{}
+\newcommand{\requirement}[5]{
+  \stepcounter{req}
 \addReqTitle{#1}
 \addReqBelongs{#4}
- \item \textbf{\reqTitle[#1]}  \importance{#2}  \bereviewed{#3} \belongsto{#4} \\#5}
+ \item \textbf{#1}  \importance{#2}  \bereviewed{#3} \belongsto{#4} \\#5}
 
 
 
